@@ -1,0 +1,22 @@
+<style>
+body { margin: 0; font-family: Arial, sans-serif; }
+.strip { position: relative; width: 108mm; height: 15mm; }
+.cell { position: absolute; top: 0; width: 33mm; height: 15mm; overflow: hidden; }
+.qr { position: absolute; left: 1.5mm; top: 1.2mm; width: 12.8mm; height: 12.8mm; }
+.date { position: absolute; right: 1.6mm; top: 0.4mm; font-size: 4.5pt; line-height: 1; }
+.name { position: absolute; left: 15mm; top: 2.6mm; width: 17mm; height: 6.2mm; font-size: 4.5pt; font-weight: bold; line-height: 1.08; text-transform: uppercase; text-align: center; overflow: hidden; }
+.serial { position: absolute; left: 15mm; bottom: 0.6mm; width: 17mm; font-size: 5pt; color: #1565c0; text-align: center; }
+.page-break { page-break-after: always; }
+</style>
+{% for row in rows %}
+<div class="strip{% if not loop.last %} page-break{% endif %}">
+  {% for d in row %}
+  <div class="cell" style="left: {{ [-0.6, 0.8, 2.0][loop.index0] + loop.index0 * 36 }}mm;">
+    <div class="date">{{ d.date }}</div>
+    <img class="qr" src="{{ d.qr }}">
+    <div class="name">{{ d.item_name or d.item_code }}</div>
+    <div class="serial">{{ d.name }}</div>
+  </div>
+  {% endfor %}
+</div>
+{% endfor %}
