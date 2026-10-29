@@ -47,7 +47,7 @@ def _html_to_pdf_a4(html):
             [
                 "wkhtmltopdf",
                 "--page-size", "A4",
-                "-T", "10mm", "-B", "10mm", "-L", "10mm", "-R", "10mm",
+                "-T", "5mm", "-B", "5mm", "-L", "5mm", "-R", "5mm",
                 "--disable-smart-shrinking",
                 "--zoom", "1",
                 "--quiet",
@@ -79,7 +79,7 @@ def print_serial_labels_a4(names):
             items.append(d)
 
     # 4 kolom x 9 baris per halaman A4 = 36 label per lembar
-    per_page = 36
+    per_page = 85
     pages = [items[i:i + per_page] for i in range(0, len(items), per_page)]
 
     template_path = frappe.get_app_path("serial_label", "templates", "serial_label_a4.html")
@@ -93,6 +93,7 @@ def print_serial_labels_a4(names):
     frappe.response["filename"] = "serial_labels_a4.pdf"
     frappe.response["filecontent"] = pdf
 
+@frappe.whitelist()
 def print_serial_labels(names):
     if isinstance(names, str):
         names = json.loads(names)

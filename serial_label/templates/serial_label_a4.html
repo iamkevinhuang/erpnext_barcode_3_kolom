@@ -1,6 +1,6 @@
 <style>
 body { margin: 0; font-family: Arial, sans-serif; }
-.page { position: relative; width: 190mm; height: 277mm; page-break-after: always; }
+.page { position: relative; width: 200mm; height: 287mm; page-break-after: always; }
 .page:last-child { page-break-after: auto; }
 .cell { position: absolute; width: 33mm; height: 15mm; overflow: hidden; }
 .qr { position: absolute; left: 1.5mm; top: 1.2mm; width: 12.8mm; height: 12.8mm; }
@@ -11,9 +11,9 @@ body { margin: 0; font-family: Arial, sans-serif; }
 {% for page in pages %}
 <div class="page">
   {% for d in page %}
-  {% set col = loop.index0 % 4 %}
-  {% set rowi = loop.index0 // 4 %}
-  <div class="cell" style="left: {{ 5 + col * 36 }}mm; top: {{ 10 + rowi * 16 }}mm;">
+  {% set col = loop.index0 % 5 %}
+  {% set rowi = loop.index0 // 5 %}
+  <div class="cell" style="left: {{ col * 36 }}mm; top: {{ rowi * 16.5 }}mm;">
     <div class="date">{{ d.date }}</div>
     <img class="qr" src="{{ d.qr }}">
     <div class="name">{{ d.item_name or d.item_code }}</div>
